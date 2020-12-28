@@ -2,36 +2,50 @@
   <div id="contact" class="contact">
     <the-map :zoomVal="12"></the-map>
     <div>
-        <button @click="toogleShowAddress()" :class="{active: showAddress}" class="contact__map contact__map--adress">
-          <img :src="iconAdressSrc" alt="img" class="contact__map-img">
-        </button>
-        <transition name="fade">
-          <div v-if="showAddress" class="contact__map-text contact__map-text--adress">
-            <p>Ikan Piranha Atas 220C </p>
-            <p>Malang - East Java</p>
-            <p>Indonesia</p>
-          </div>
-        </transition>
-      </div>
-      <div>
-        <button @click="toogleShowPhone()" :class="{active: showPhone}" class="contact__map contact__map--phone">
-          <img :src="iconPhoneSrc" alt="img" class="contact__map-img">
-        </button>
-        <transition name="fade">
-          <div v-if="showPhone" class="contact__map-text contact__map-text--phone">
-            <p>Phone number </p>
-            <p>+456 454 254 52</p>
-            <p>Index: 235012</p>
-          </div>
-        </transition>
-      </div>
+      <button
+        @click="toogleShowAddress()"
+        :class="{ active: showAddress }"
+        class="contact__map contact__map--adress"
+      >
+        <img :src="iconAdressSrc" alt="img" class="contact__map-img" />
+      </button>
+      <transition name="fade">
+        <div
+          v-if="showAddress"
+          class="contact__map-text contact__map-text--adress"
+        >
+          <p>Ikan Piranha Atas 220C</p>
+          <p>Malang - East Java</p>
+          <p>Indonesia</p>
+        </div>
+      </transition>
+    </div>
+    <div>
+      <button
+        @click="toogleShowPhone()"
+        :class="{ active: showPhone }"
+        class="contact__map contact__map--phone"
+      >
+        <img :src="iconPhoneSrc" alt="img" class="contact__map-img" />
+      </button>
+      <transition name="fade">
+        <div
+          v-if="showPhone"
+          class="contact__map-text contact__map-text--phone"
+        >
+          <p>Phone number</p>
+          <p>+456 454 254 52</p>
+          <p>Index: 235012</p>
+        </div>
+      </transition>
+    </div>
     <div class="contact__box container">
       <img class="contact__img" :src="iconSrc" alt="img" />
       <p class="contact__title title">{{ title }}</p>
       <div id="contact-form" class="contact__form-box">
         <div class="separator"></div>
         <div v-if="isSending" class="loading">Sending...</div>
-        <form class="contact__form" @submit.prevent="onSubmit()">
+        <form class="contact__form" @submit.prevent="onSubmit(this)">
           <input
             required
             name="name"
@@ -60,15 +74,18 @@
           <button type="submit" class="contact__btn">SEND MESSAGE</button>
         </form>
       </div>
-      <div class="scroll-top"  v-scroll-to="{
-        el: path,
-        duration: 500,
-        easing: 'linear',
-        force: true,
-        x: false,
-        y: true
-      }">
-        <img :src=iconTopSrc alt="toTop" class="scroll-top__img">
+      <div
+        class="scroll-top"
+        v-scroll-to="{
+          el: path,
+          duration: 500,
+          easing: 'linear',
+          force: true,
+          x: false,
+          y: true,
+        }"
+      >
+        <img :src="iconTopSrc" alt="toTop" class="scroll-top__img" />
       </div>
     </div>
   </div>
@@ -110,7 +127,7 @@ export default {
     },
     toogleShowPhone() {
       this.showPhone = !this.showPhone;
-       if (this.showAddress) {
+      if (this.showAddress) {
         this.showAddress = !this.showAddress;
       }
     },
@@ -119,14 +136,16 @@ export default {
         this.contact[field] = "";
       }
     },
-    onSubmit(evt) {
-      evt.preventDefault();
+    onSubmit() {
       this.isSending = true;
       setTimeout(() => {
         let form = new FormData();
         for (let field in this.contact) {
           form.append(field, this.contact[field]);
         }
+        this.clearForm();
+        this.isSending = false;
+        /*
         this.$http
           .post("/app.php", form)
           .then((response) => {
@@ -136,7 +155,7 @@ export default {
           })
           .catch((e) => {
             console.log(e);
-          });
+          });*/
       }, 1000);
     },
   },
@@ -227,7 +246,7 @@ export default {
     }
   }
   &__map {
-    background: #9F9ACF;
+    background: #9f9acf;
     width: 92px;
     height: 92px;
     border: none;
@@ -252,7 +271,7 @@ export default {
   &__map--phone.active {
     right: 219px;
   }
-   &__map--adress.active:hover {
+  &__map--adress.active:hover {
     background: rgba(94, 85, 175, 0.7);
   }
   &__map--phone.active:hover {
@@ -266,9 +285,9 @@ export default {
   }
   &__map-text {
     background: rgba(235, 235, 235, 0.51);
-    color: #665F60;
+    color: #665f60;
     font-size: 18px;
-    font-family: 'PT Sans';
+    font-family: "PT Sans";
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -364,7 +383,7 @@ export default {
       &--adress {
         top: 45px;
       }
-      &-text--phone{
+      &-text--phone {
         top: 0;
       }
       &-text {
