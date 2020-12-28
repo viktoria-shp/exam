@@ -112,13 +112,8 @@ export default {
       text-align: center;
       -webkit-font-smoothing: antialiased;
     }
-    .slick-active {
-      color: $bg;
-      content: "";
+    .slick-dots li.slick-active button:before {
       background: $bg;
-      border-radius: 50%;
-      width: 12px;
-      height: 12px;
     }
   }
   @include media-max-width($screen-tablet) {
