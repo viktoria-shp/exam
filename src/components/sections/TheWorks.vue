@@ -73,9 +73,6 @@ export default {
       width: 71%;
       margin-bottom: 48px;
     }
-    &__slide {
-      @include padding-hack;
-    }
     &__img {
       width: 100%;
       margin-bottom: 40px;
