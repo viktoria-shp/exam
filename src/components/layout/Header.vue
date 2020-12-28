@@ -118,7 +118,7 @@ export default {
     url(../../assets/bg_header.png);
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 1070px;
+  min-height: 1071px;
   display: flex;
   flex-direction: column;
   align-items: center;
